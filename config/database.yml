@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  pool: 20
+  port: 5432
+  encoding: unicode
+  username: <%= ENV['MEOW_MEOW_DATABASE_USERNAME'] %>
+  password: <%= ENV['MEOW_MEOW_DATABASE_PASSWORD'] %>
+
+development:
+  <<: *default
+  database: meow_meow_development
+
+test:
+  <<: *default
+  database: meow_meow_test
+
+production:
+  <<: *default
+  database: meow_meow_production
