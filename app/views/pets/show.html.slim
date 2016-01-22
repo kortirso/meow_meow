@@ -1,0 +1,10 @@
+h1 Pet show form
+p= "This is page about #{@pet.name}"
+p= image_tag @pet.image
+p= @pet.caption
+p= "Author's email - #{@pet.user.email}"
+h2 Comments
+- @pet.comments.each do |comment|
+    .comment
+        p= comment.body
+        p= "Author's email - #{comment.user.email}"

@@ -293,6 +293,7 @@ DEPENDENCIES
   pg (~> 0.15)
   rails (= 4.2.5)
   remotipart
+  responders
   rmagick
   rspec-rails
   sass-rails (~> 5.0)

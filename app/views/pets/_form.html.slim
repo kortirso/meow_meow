@@ -1,0 +1,7 @@
+.col-xs-6
+    h2 Pet's form
+    = simple_form_for @pet do |f|
+        p= f.input :name, placeholder: 'Enter name'
+        p= f.input :caption, placeholder: 'Enter caption'
+        p= f.file_field :image
+        p= f.submit 'Submit', class: 'btn btn-primary'

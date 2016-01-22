@@ -1,0 +1,16 @@
+h1 Welcome to MeowMeow system
+- if current_user
+    = link_to 'Add pet', new_pet_path
+- @pets.each do |pet|
+    .row
+        h2= "Pet's name - #{pet.name}"
+        .pet
+            - if pet.image.blank?
+
+            - else
+                span= image_tag pet.image.thumb, class: 'img-responsive'
+            span= pet.caption
+            p
+                = link_to 'Show', pet_path(pet), class: 'btn btn-default'
+                - if can?(:update, pet)
+                    = link_to 'Edit', edit_pet_path(pet), class: 'btn btn-default'

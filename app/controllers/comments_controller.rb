@@ -3,6 +3,9 @@ class CommentsController < ApplicationController
     before_action :pet_find, only: :create
     before_action :comment_find, except: :create
 
+    respond_to :js
+    authorize_resource
+
     def create
         @comment = @pet.comments.create(comment_params.merge(user: current_user))
     end
