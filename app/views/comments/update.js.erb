@@ -1,0 +1,3 @@
+$('#edit_comment_<%= @comment.id %>').hide();
+$('#<%= @comment.id %>').show();
+$('#comment_<%= @comment.id %> .body').html('<%= @comment.body %>');

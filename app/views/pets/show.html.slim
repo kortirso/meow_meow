@@ -3,8 +3,10 @@ p= "This is page about #{@pet.name}"
 p= image_tag @pet.image
 p= @pet.caption
 p= "Author's email - #{@pet.user.email}"
-h2 Comments
-- @pet.comments.each do |comment|
-    .comment
-        p= comment.body
-        p= "Author's email - #{comment.user.email}"
+- if can?(:create, Comment)
+    p Put your comment for this pet
+    = simple_form_for [@pet, @comment], remote: true do |f|
+        p= f.text_field :body
+        p= f.hidden_field :pet_id, value: @pet.id
+        p= f.submit 'Comment', class: 'btn btn-default'
+#comments= render 'comments/all'

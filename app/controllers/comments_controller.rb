@@ -11,11 +11,12 @@ class CommentsController < ApplicationController
     end
 
     def update
-        
+        @comment.update(comment_params) if @comment.user_id == current_user.id
+        respond_with @comment
     end
 
     def destroy
-
+        @comment.user_id == current_user.id ? respond_with(@comment.destroy) : respond_with(@comment)
     end
 
     private
