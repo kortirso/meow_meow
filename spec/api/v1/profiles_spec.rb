@@ -4,7 +4,9 @@ describe 'Profile API' do
 
         context 'authorized' do
             let!(:me) { create :user }
-            let!(:access_token) { create :access_token, resource_owner_id: me.id }
+            let!(:pet) { create :pet, user: me }
+            let!(:comment) { create :comment, user: me }
+            let(:access_token) { create :access_token, resource_owner_id: me.id }
 
             before { get '/api/v1/profiles/me', format: :json, access_token: access_token.token }
 
@@ -14,8 +16,7 @@ describe 'Profile API' do
 
             %w(id email created_at updated_at admin).each do |attr|
                 it "contains #{attr}" do
-                    skip 'unsuccess'
-                    expect(response.body).to be_json_eql(me.send(attr.to_sym).to_json).at_path(attr)
+                    expect(response.body).to be_json_eql(me.send(attr.to_sym).to_json).at_path("user/#{attr}")
                 end
             end
 
@@ -24,10 +25,34 @@ describe 'Profile API' do
                     expect(response.body).to_not have_json_path(attr)
                 end
             end
+
+            context 'comments' do
+                it 'included in user object' do
+                    expect(response.body).to have_json_size(1).at_path('user/comments')
+                end
+
+                %w(id body created_at updated_at user_id).each do |attr|
+                    it "contains #{attr}" do
+                        expect(response.body).to be_json_eql(comment.send(attr.to_sym).to_json).at_path("user/comments/0/#{attr}")
+                    end
+                end
+            end
+
+            context 'pets' do
+                it 'included in user object' do
+                    expect(response.body).to have_json_size(1).at_path('user/pets')
+                end
+
+                %w(id name caption created_at updated_at user_id).each do |attr|
+                    it "contains #{attr}" do
+                        expect(response.body).to be_json_eql(pet.send(attr.to_sym).to_json).at_path("user/pets/0/#{attr}")
+                    end
+                end
+            end
         end
 
         def do_request(options = {})
-            get "/api/v1/profiles/me", { format: :json }.merge(options)
+            get '/api/v1/profiles/me', { format: :json }.merge(options)
         end
     end
 
@@ -55,7 +80,7 @@ describe 'Profile API' do
         end
 
         def do_request(options = {})
-            get "/api/v1/profiles/all", { format: :json }.merge(options)
+            get '/api/v1/profiles/all', { format: :json }.merge(options)
         end
     end
 end

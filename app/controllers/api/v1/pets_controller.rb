@@ -8,7 +8,7 @@ class Api::V1::PetsController < Api::V1::BaseController
 
     def show
         @pet = Pet.find(params[:id])
-        respond_with @pet, serializer: PetSerializer
+        respond_with @pet, serializer: PetSerializer::Pet
     end
 
     def create
