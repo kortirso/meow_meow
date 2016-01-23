@@ -52,7 +52,7 @@ describe 'Pets API' do
             end
 
             %w(id name caption created_at updated_at user_id).each do |attr|
-                it "question object contains #{attr}" do
+                it "pet object contains #{attr}" do
                     expect(response.body).to be_json_eql(pet.send(attr.to_sym).to_json).at_path("pet/#{attr}")
                 end
             end
