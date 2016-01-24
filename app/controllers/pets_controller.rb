@@ -3,7 +3,7 @@ class PetsController < ApplicationController
     before_action :pet_find, only: [:show, :edit, :update, :destroy]
     before_action :build_comment, only: :show
 
-    respond_to :js, only: :update
+    respond_to :js, only: [:update, :destroy]
     authorize_resource
 
     def index
@@ -27,12 +27,16 @@ class PetsController < ApplicationController
     end
 
     def update
-        @pet.update(pet_params) if @pet.user_id == current_user.id
+        @pet.update(pet_params) if @pet.user_id == current_user.id || current_user.admin
         respond_with @pet
     end
 
     def destroy
-        @pet.user_id == current_user.id ? respond_with(@pet.destroy) : respond_with(@pet)
+        if @pet.user_id == current_user.id || current_user.admin
+            respond_with(@pet.destroy)
+        else
+            render nothing: true
+        end
     end
 
     private
