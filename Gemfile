@@ -24,8 +24,6 @@ gem 'doorkeeper'
 gem 'active_model_serializers'
 gem 'oj'
 gem 'oj_mimic_json'
-gem 'mysql2'
-gem 'thinking-sphinx'
 gem 'responders'
 
 group :development, :test do
@@ -41,10 +39,6 @@ end
 
 group :development do
   gem 'bullet'
-  gem 'capistrano', require: false
-  gem 'capistrano-bundler', require: false
-  gem 'capistrano-rails', require: false
-  gem 'capistrano-rvm', require: false
 end
 
 group :test do
