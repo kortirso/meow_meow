@@ -5,9 +5,7 @@ h1 Welcome to MeowMeow system
     .row id="pet_#{pet.id}"
         h2= "Pet's name - #{pet.name}"
         .pet
-            - if pet.image.blank?
-
-            - else
+            - unless pet.image.blank?
                 span= image_tag pet.image.thumb, class: 'img-responsive'
             span= pet.caption
             p
