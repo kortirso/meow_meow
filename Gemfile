@@ -25,6 +25,8 @@ gem 'oj'
 gem 'oj_mimic_json'
 gem 'responders'
 
+gem 'react-rails'
+
 group :development, :test do
   gem 'byebug'
   gem 'web-console', '~> 2.0'
