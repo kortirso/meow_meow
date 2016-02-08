@@ -8,10 +8,10 @@ html
         = javascript_include_tag 'application'
         = csrf_meta_tags
     body
-        .container
-            .col-sm-8
+        .row
+            .columns.medium-8
                 = yield
-            .col-sm-4
+            .columns.medium-4
                 - if current_user
                     p= "Login as #{current_user.email}"
                     p= link_to 'Logoff', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-danger', id: 'destroy'
