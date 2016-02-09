@@ -1,11 +1,12 @@
 h2 Comments
-- @pet.comments.with_id.each do |comment|
+= react_component('CommentList', comments: ActiveModel::ArraySerializer.new(@pet.comments.with_id, each_serializer: CommentSerializer).to_json)
+/- @pet.comments.with_id.includes(:user).each do |comment|
     .comment id="comment_#{comment.id}"
         .edit-form= simple_form_for [@pet, comment], remote: true do |f|
             = f.input :body
             = f.submit 'Save', class: 'btn btn-default'
             = link_to 'Cancel', '', class: 'cancel_edit_comment btn btn-default'
-        p.body= comment.body
+        = react_component('Comment', author: comment.user.email, body: comment.body)
         - if can?(:update, comment)
             = link_to 'Edit comment', '', class: 'edit_comment_btn btn btn-sm btn-warning', remote: true, id: "#{comment.id}"
         - if can?(:destroy, comment)
