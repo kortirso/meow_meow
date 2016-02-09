@@ -4,7 +4,7 @@ var CommentList = React.createClass({
             <div>
                 {
                     JSON.parse(this.props.comments).map(function(comment) {
-                        return <Comment key={comment.id} body={comment.body} />;
+                        return <Comment key={comment.id} {... comment} />;
                     })
                 }
             </div>
