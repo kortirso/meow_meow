@@ -1,3 +1,19 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&subset=latin,cyrillic');
+
+* {
+    font-family: 'Ubuntu', sans-serif;
+}
+
 .edit_comment {
     display: none;
+}
+
+#comments {
+    .row, .comment {
+        margin: 0 0 20px;
+        .author {
+            margin: 0 0 5px;
+            font-style: italic;
+        }
+    }
 }

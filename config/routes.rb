@@ -2,7 +2,7 @@ Rails.application.routes.draw do
     use_doorkeeper
     devise_for :users
     resources :pets do
-        resources :comments, only: [:create, :update, :destroy]
+        resources :comments, only: [:index, :create, :update, :destroy]
     end
     namespace :api do
         namespace :v1 do

@@ -1,9 +1,9 @@
 var CommentList = React.createClass({
     render: function() {
         return (
-            <div>
+            <div className='row'>
                 {
-                    JSON.parse(this.props.comments).map(function(comment) {
+                    this.props.comments.map(function(comment) {
                         return <Comment key={comment.id} {... comment} />;
                     })
                 }

@@ -1,13 +1,18 @@
 class CommentsController < ApplicationController
-    before_action :authenticate_user!
-    before_action :pet_find, only: :create
-    before_action :comment_find, except: :create
+    before_action :authenticate_user!, except: :index
+    before_action :pet_find, only: [:index, :create]
+    before_action :comment_find, except: [:index, :create]
 
     respond_to :js
     authorize_resource
 
+    def index
+        respond_with(@comments = ActiveModel::ArraySerializer.new(@pet.comments.includes(:user).with_id.order(id: :desc), each_serializer: CommentSerializer).to_json)
+    end
+
     def create
         @comment = @pet.comments.create(comment_params.merge(user: current_user))
+        render nothing: true
     end
 
     def update

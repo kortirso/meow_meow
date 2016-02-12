@@ -5,9 +5,9 @@ var Comment = React.createClass({
     },
     render: function() {
         return (
-            <div>
-                <p>User: {this.props.author}</p>
-                <p>{this.props.body}</p>
+            <div className='comment'>
+                <p className='author'><q>Author: {this.props.author}</q></p>
+                <p className='body'>{this.props.body}</p>
             </div>
         );
     }
