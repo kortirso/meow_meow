@@ -1,11 +1,13 @@
 var CommentBox = React.createClass({
     getInitialState: function () {
         return {
-            comments: []
+            comments: [],
+            user: []
         };
     },
     componentDidMount: function () {
         this.loadCommentsFromServer();
+        this.setState({user: this.props.user});
     },
     loadCommentsFromServer: function () {
         $.ajax({
@@ -27,7 +29,7 @@ var CommentBox = React.createClass({
             url: this.props.url,
             dataType: 'json',
             type: 'POST',
-            data: {"comment": comment},
+            data: {'comment': comment},
             success: function(data) {
                 this.loadCommentsFromServer();
             }.bind(this),
@@ -35,8 +37,8 @@ var CommentBox = React.createClass({
                 console.error(this.props.url, status, err.toString());
             }.bind(this)
         });
-  },
-    render: function () {
+    },
+    renderWithUser: function() {
         return (
             <div className='commentBox'>
                 <h2>Comments</h2>
@@ -44,5 +46,21 @@ var CommentBox = React.createClass({
                 <CommentList comments={this.state.comments} />
             </div>
         );
+    },
+    renderWithoutUser: function() {
+        return (
+            <div className='commentBox'>
+                <h2>Comments</h2>
+                <CommentList comments={this.state.comments} />
+            </div>
+        );
+    },
+    render: function () {
+        if (this.state.user) {
+            return this.renderWithUser();
+        }
+        else {
+            return this.renderWithoutUser();
+        }
     }
 });

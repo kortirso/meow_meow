@@ -4,4 +4,7 @@ p= image_tag @pet.image
 p= @pet.caption
 p= "Author's email - #{@pet.user.email}"
 #comments
-    = react_component('CommentBox', url: "/pets/#{@pet.id}/comments.json")
+    - if current_user
+        = react_component('CommentBox', url: "/pets/#{@pet.id}/comments.json", user: true)
+    - else
+        = react_component('CommentBox', url: "/pets/#{@pet.id}/comments.json", user: false)
