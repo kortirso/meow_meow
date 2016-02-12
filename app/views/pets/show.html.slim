@@ -1,8 +1,8 @@
-h1 Pet show form
-p= "This is page about #{@pet.name}"
-p= image_tag @pet.image
+h1= @pet.name
+p.pet_image= image_tag @pet.image
+p.pet_author
+    q= @pet.user.email
 p= @pet.caption
-p= "Author's email - #{@pet.user.email}"
 #comments
     - if current_user
         = react_component('CommentBox', url: "/pets/#{@pet.id}/comments.json", user: true)
