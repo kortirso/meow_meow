@@ -8,8 +8,12 @@
     display: none;
 }
 
+.row, .row .row {
+    margin: 0 0 20px;
+}
+
 #comments {
-    .row, .comment {
+    .comment {
         margin: 0 0 20px;
         .author {
             margin: 0 0 5px;

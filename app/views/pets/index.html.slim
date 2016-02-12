@@ -9,8 +9,8 @@ h1 Welcome to MeowMeow system
                 span= image_tag pet.image.thumb, class: 'img-responsive'
             span= pet.caption
             p
-                = link_to 'Show', pet_path(pet), class: 'btn btn-default'
+                = link_to 'Show', pet_path(pet), class: 'button'
                 - if can?(:update, pet)
-                    = link_to 'Edit', edit_pet_path(pet), class: 'btn btn-default'
+                    = link_to 'Edit', edit_pet_path(pet), class: 'button'
                 - if can?(:destroy, pet)
-                    = link_to 'Destroy', pet_path(pet), method: :delete, class: 'btn btn-default', remote: true
+                    = link_to 'Destroy', pet_path(pet), method: :delete, class: 'button', remote: true
